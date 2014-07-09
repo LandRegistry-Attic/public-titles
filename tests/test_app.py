@@ -10,10 +10,6 @@ class AppTestCase(unittest.TestCase):
     #Nothing to put into the teardown for this testcase
     #def tearDown(self):
 
-    def test_hello_world(self):
+    def test_get_title(self):
         rv = self.app.get('/titles/DN100')
-        print rv.data
-        assert 'Hello DN100' in rv.data
-
-if __name__ == '__main__':
-    unittest.main()
+        assert 'DN100' in rv.data
