@@ -1,2 +1,9 @@
 #!/bin/bash
-foreman start -p 8003
+
+export SETTINGS='config.Config'
+
+if [[ $1 == "dev" ]]; then
+    python run_dev.py
+else
+    foreman start -p 8003
+fi
