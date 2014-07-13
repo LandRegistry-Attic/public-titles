@@ -1,9 +1,10 @@
 #!/bin/bash
 
-export SETTINGS='config.Config'
+export SETTINGS='config.DevelopmentConfig'
+export DATABASE_URL='postgresql://localhost/publictitles'
 
-if [[ $1 == "dev" ]]; then
-    python run_dev.py
-else
-    foreman start -p 8003
-fi
+createuser -s publictitles
+createdb -U publictitles -O publictitles publictitles -T template0
+
+python manage.py db upgrade
+python run_dev.py

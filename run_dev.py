@@ -1,2 +1,5 @@
 from publictitles.server import app
-app.run(host="0.0.0.0", port=8006, debug=True)
+import os
+
+app.run(host="0.0.0.0", port=int(os.environ['PORT']), debug=True)
+
