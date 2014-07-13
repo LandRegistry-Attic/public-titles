@@ -5,3 +5,10 @@ install:
 - pip install -r requirements.txt
 - pip install -r requirements_test.txt
 script: py.test
+deploy:
+  provider: heroku
+  api_key:
+    secure: eLQT0MEm2f/HSM5HGBMfFtIYhZUs0aKecnPGBesfsaMQRGOQoctpgXY9/jvnv/KpmZcX34yIjeWD8Gvt7QKPBS2ClFQmpn9kOmc8gapSK/4s2BYZ/gKnqnZaLl2g7H3fmxqj8axh/1dWLgghgKiRXzo0+3yE7QiJQmj2Miu/Tg8=
+  app: lr-public-titles-api
+  on:
+    repo: LandRegistry/public-titles-api
