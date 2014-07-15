@@ -10,7 +10,6 @@ class TitleFactory(SQLAlchemyModelFactory):
         model = Title
         sqlalchemy_session = db.session
 
-    id = Sequence(lambda n: n)
     title_number = "TN1234567"
     address  = "1 High Street"
     postcode = "ABC 123"

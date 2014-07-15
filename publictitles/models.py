@@ -9,8 +9,7 @@ class Title(db.Model):
     address  = db.Column('address', db.String(1000))
     postcode = db.Column('post_code', db.String(25))
 
-    def __init__(self, id, title_number, address, postcode):
-        self.id = id
+    def __init__(self, title_number, address, postcode):
         self.title_number = title_number
         self.address = address
         self.postcode = postcode

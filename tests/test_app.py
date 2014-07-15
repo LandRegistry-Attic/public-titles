@@ -29,3 +29,10 @@ class AppTestCase(unittest.TestCase):
         assert response_json['title_number'] == 'TN7654321'
         assert response_json['address'] == '308 Negra Arroyo Lane'
         assert response_json['postcode'] == '87104'
+
+    def test_post_title(self):
+        response = self.app.post('/titles',
+                                data='{"title_number":"DN100","address":"1224 New Street","postcode":"PL1 7YY"}',
+                                content_type='application/json')
+
+        self.assertEqual(response.status_code, 200)
