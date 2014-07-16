@@ -1,4 +1,3 @@
-from factory import Sequence
 from factory.alchemy import SQLAlchemyModelFactory
 
 from publictitles.models import Title

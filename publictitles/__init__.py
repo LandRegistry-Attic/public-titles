@@ -10,8 +10,6 @@ if not app.debug:
     app.logger.addHandler(logging.StreamHandler())
     app.logger.setLevel(logging.INFO)
 
-app.logger.info( "============")
-app.logger.info(app.config)
-app.logger.info("============")
+app.logger.info("\nConfiguration\n%s\n" % app.config)
 
 db = SQLAlchemy(app)

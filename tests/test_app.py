@@ -7,11 +7,7 @@ import unittest
 class AppTestCase(unittest.TestCase):
 
     def setUp(self):
-        SQLALCHEMY_DATABASE_URI = "sqlite://"
-        server.app.config['TESTING'] = True
-        server.app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
         db.create_all()
-
         title = TitleFactory(title_number= 'TN7654321', address = '308 Negra Arroyo Lane', postcode = '87104')
         db.session.add(title)
         db.session.commit()
@@ -22,8 +18,13 @@ class AppTestCase(unittest.TestCase):
         db.session.remove()
         db.drop_all()
 
-    def test_get_title(self):
-        response = self.app.get('/titles/TN7654321')
+    def test_get_unknown_title(self):
+        response = self.app.get('/title/TN99999')
+        assert response.status_code == 400
+
+    def test_get_existing_title(self):
+        response = self.app.get('/title/TN7654321')
+
         response_json = json.loads(response.data)
 
         assert response_json['title_number'] == 'TN7654321'
@@ -31,8 +32,8 @@ class AppTestCase(unittest.TestCase):
         assert response_json['postcode'] == '87104'
 
     def test_post_title(self):
-        response = self.app.post('/titles',
+        response = self.app.post('/title/DN100' ,
                                 data='{"title_number":"DN100","address":"1224 New Street","postcode":"PL1 7YY"}',
                                 content_type='application/json')
 
-        self.assertEqual(response.status_code, 200)
+        assert response.status_code == 200
