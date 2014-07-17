@@ -11,7 +11,8 @@ def title_number(title_number):
                                      'house_number': title.house_number,
                                      'road': title.road,
                                      'town': title.town,
-                                     'postcode': title.postcode})
+                                     'postcode': title.postcode,
+                                     'pricepaid': title.price_paid})
     else:
         abort(400)
 
