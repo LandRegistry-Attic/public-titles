@@ -10,5 +10,7 @@ class TitleFactory(SQLAlchemyModelFactory):
         sqlalchemy_session = db.session
 
     title_number = "TN1234567"
-    address  = "1 High Street"
+    house_number = "1"
+    road  = "High Street"
+    town = "Croydon"
     postcode = "ABC 123"
