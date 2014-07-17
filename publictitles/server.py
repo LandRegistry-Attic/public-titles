@@ -8,7 +8,9 @@ def title_number(title_number):
     title = Title.query.filter_by(title_number=title_number).first()
     if title:
         return jsonify({'title_number':  title.title_number,
-                                     'address': title.address,
+                                     'house_number': title.house_number,
+                                     'road': title.road,
+                                     'town': title.town,
                                      'postcode': title.postcode})
     else:
         abort(400)
@@ -23,9 +25,12 @@ def add_title(title_number):
         app.logger.info("Title number %s already" % title_number)
     else:
         app.logger.info("Create entry for title number %s" % title_number)
-        address = request.json['address']
+        house_number = request.json['house_number']
+        road = request.json['road']
+        town = request.json['town']
         postcode = request.json['postcode']
-        title = Title(title_number, address, postcode)
+        title = Title(title_number, house_number, road, town, postcode)
+        title.price_paid = request.json['price_paid']
         db.session.add(title)
         db.session.commit()
     return "", 200
