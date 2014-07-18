@@ -11,7 +11,6 @@ class AppTestCase(unittest.TestCase):
         title = TitleFactory(title_number= 'TN7654321', house_number= "1", road= 'Negra Arroyo Lane', town="Croydon", postcode = '87104')
         db.session.add(title)
         db.session.commit()
-
         self.app = server.app.test_client()
 
     def tearDown(self):
@@ -20,7 +19,7 @@ class AppTestCase(unittest.TestCase):
 
     def test_get_unknown_title(self):
         response = self.app.get('/title/TN99999')
-        assert response.status_code == 400
+        assert response.status_code == 404
 
     def test_get_existing_title(self):
         response = self.app.get('/title/TN7654321')
@@ -33,8 +32,8 @@ class AppTestCase(unittest.TestCase):
         assert response_json['town'] == 'Croydon'
         assert response_json['postcode'] == '87104'
 
-    def test_post_title(self):
-        response = self.app.post('/title/DN100' ,
+    def test_put_title(self):
+        response = self.app.put('/title/DN100' ,
                                 data='{"title_number":"DN100","house_number":"1", "road":"New Street", "town":"Croydon","postcode":"PL1 7YY","price_paid":"233"}',
                                 content_type='application/json')
 
