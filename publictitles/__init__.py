@@ -1,7 +1,6 @@
 import os, logging
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.basicauth import BasicAuth
 
 app = Flask(__name__)
 
@@ -14,9 +13,3 @@ if not app.debug:
 app.logger.info("\nConfiguration\n%s\n" % app.config)
 
 db = SQLAlchemy(app)
-
-if os.environ.get('BASIC_AUTH_USERNAME'):
-    app.config['BASIC_AUTH_USERNAME'] = os.environ['BASIC_AUTH_USERNAME']
-    app.config['BASIC_AUTH_PASSWORD'] = os.environ['BASIC_AUTH_PASSWORD']
-    app.config['BASIC_AUTH_FORCE'] = True
-    basic_auth = BasicAuth(app)
