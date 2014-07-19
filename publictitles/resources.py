@@ -1,3 +1,4 @@
+from flask import Response
 from flask.ext.restful import Resource, fields, marshal_with, abort, reqparse
 
 from publictitles.models import Title
@@ -28,12 +29,15 @@ class TitleResource(Resource):
     def put(self, title_number):
         args = self.parser.parse_args()
         existing_title = Title.query.filter_by( title_number = args['title_number']).first()
+        status = 201
         if existing_title:
             app.logger.info('Title number %s already exists. Replace with %s' % (args['title_number'], args))
             db.session.delete(existing_title)
+            db.session.commit()
+            status = 200
         app.logger.info('Create title with args %s' % args)
         title = Title(**args)
         db.session.add( title )
         db.session.commit()
-        return "", 200
+        return Response(status =status)
 

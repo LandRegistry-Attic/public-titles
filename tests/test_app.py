@@ -37,4 +37,18 @@ class AppTestCase(unittest.TestCase):
                                 data='{"title_number":"DN100","house_number":"1", "road":"New Street", "town":"Croydon","postcode":"PL1 7YY","price_paid":"233"}',
                                 content_type='application/json')
 
+        assert response.status_code == 201
+
+
+    def test_put_title_twice_gives_correct_status_codes(self):
+        response = self.app.put('/title/DN100' ,
+                                data='{"title_number":"DN100","house_number":"1", "road":"New Street", "town":"Croydon","postcode":"PL1 7YY","price_paid":"233"}',
+                                content_type='application/json')
+
+        assert response.status_code == 201
+
+        response = self.app.put('/title/DN100' ,
+                                data='{"title_number":"DN100","house_number":"1", "road":"New Street", "town":"Croydon","postcode":"PL1 7YY","price_paid":"233"}',
+                                content_type='application/json')
+
         assert response.status_code == 200
