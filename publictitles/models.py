@@ -6,7 +6,7 @@ class Title(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title_number = db.Column('title_number', db.String(100), unique=True)
-    house_number = db.Column('house_number', db.String(10))
+    house_number = db.Column('house_number', db.String(100))
     road  = db.Column('road', db.String(1000))
     town = db.Column('town', db.String(100))
     postcode = db.Column('post_code', db.String(25))
