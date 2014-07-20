@@ -18,11 +18,11 @@ class AppTestCase(unittest.TestCase):
         db.drop_all()
 
     def test_get_unknown_title(self):
-        response = self.app.get('/title/TN99999')
+        response = self.app.get('/titles/TN99999')
         assert response.status_code == 404
 
     def test_get_existing_title(self):
-        response = self.app.get('/title/TN7654321')
+        response = self.app.get('/titles/TN7654321')
 
         response_json = json.loads(response.data)
 
@@ -33,7 +33,7 @@ class AppTestCase(unittest.TestCase):
         assert response_json['postcode'] == '87104'
 
     def test_put_title(self):
-        response = self.app.put('/title/DN100' ,
+        response = self.app.put('/titles/DN100' ,
                                 data='{"title_number":"DN100","house_number":"1", "road":"New Street", "town":"Croydon","postcode":"PL1 7YY","price_paid":"233"}',
                                 content_type='application/json')
 
@@ -41,13 +41,13 @@ class AppTestCase(unittest.TestCase):
 
 
     def test_put_title_twice_gives_correct_status_codes(self):
-        response = self.app.put('/title/DN100' ,
+        response = self.app.put('/titles/DN100' ,
                                 data='{"title_number":"DN100","house_number":"1", "road":"New Street", "town":"Croydon","postcode":"PL1 7YY","price_paid":"233"}',
                                 content_type='application/json')
 
         assert response.status_code == 201
 
-        response = self.app.put('/title/DN100' ,
+        response = self.app.put('/titles/DN100' ,
                                 data='{"title_number":"DN100","house_number":"1", "road":"New Street", "town":"Croydon","postcode":"PL1 7YY","price_paid":"233"}',
                                 content_type='application/json')
 

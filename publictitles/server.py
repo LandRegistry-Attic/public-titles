@@ -5,4 +5,4 @@ from publictitles import app
 from publictitles.resources import TitleResource
 
 api = Api(app)
-api.add_resource(TitleResource, '/title/<string:title_number>')
+api.add_resource(TitleResource, '/titles/<string:title_number>')
