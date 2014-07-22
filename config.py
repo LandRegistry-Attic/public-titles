@@ -11,3 +11,9 @@ class DevelopmentConfig(Config):
 class TestConfig(DevelopmentConfig):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "sqlite://"
+    
+
+class DockerConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('PUBLICTITLESDB_1_PORT_5432_TCP', '').replace('tcp://', 'http://')
+
