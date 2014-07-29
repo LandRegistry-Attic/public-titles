@@ -12,4 +12,13 @@ if not app.debug:
 
 app.logger.info("\nConfiguration\n%s\n" % app.config)
 
+def health(self):
+    try:
+        with self.engine.connect() as c:
+            c.execute('select 1=1').fetchall()
+            return True, 'DB'
+    except:
+        return False, 'DB'
+
 db = SQLAlchemy(app)
+SQLAlchemy.health = health
