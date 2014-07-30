@@ -1,6 +1,7 @@
 import os, logging
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from raven.contrib.flask import Sentry
 
 app = Flask(__name__)
 
@@ -11,6 +12,10 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
 
 app.logger.info("\nConfiguration\n%s\n" % app.config)
+
+# Sentry exception reporting
+if 'SENTRY_DSN' in os.environ:
+    sentry = Sentry(app, dsn=os.environ['SENTRY_DSN'])
 
 def health(self):
     try:
